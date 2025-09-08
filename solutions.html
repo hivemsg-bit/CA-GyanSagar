@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutions - CA-GyanSagar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .header { display:flex; justify-content: space-between; align-items:center; margin-bottom: 1rem; }
+    .title { font-family:'Poppins', sans-serif; color: var(--primary-color); font-weight:600; }
+    .sol-card { background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:1rem 1.25rem; box-shadow:0 4px 16px rgba(0,0,0,.04); }
+    .sol-card + .sol-card { margin-top: .75rem; }
+    .meta { color:#4d5966; font-size:.95rem; margin-bottom:.25rem; }
+    .ans { color:#0a7d00; font-weight:600; }
+    .you { color:#d93025; font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="title" id="solTitle">Solutions</div>
+      <div>
+        <a class="btn btn-outline" href="index.html#free-tests">Back to Free Tests</a>
+      </div>
+    </div>
+    <div id="solutions"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const level = (params.get('level') || 'foundation').toLowerCase();
+    const type = (params.get('type') || 'free').toLowerCase();
+    const ATTEMPT_KEY = `attempt_${level}_${type}`;
+
+    let attempt = null;
+    try { attempt = JSON.parse(localStorage.getItem(ATTEMPT_KEY) || 'null'); } catch (e) { attempt = null; }
+    if (!attempt || !attempt.questions) {
+      alert('No attempt data found.');
+      window.location.href = 'index.html#free-tests';
+    }
+
+    document.getElementById('solTitle').textContent = `Solutions - CA ${level.charAt(0).toUpperCase()+level.slice(1)}`;
+
+    const container = document.getElementById('solutions');
+    attempt.questions.forEach((q, idx) => {
+      const your = attempt.answers ? attempt.answers[idx] : null;
+      const correct = q.ans;
+      const card = document.createElement('div');
+      card.className = 'sol-card';
+      card.innerHTML = `
+        <div class="meta">Subject: ${q.subject || 'General'}</div>
+        <div><strong>Q${idx+1}.</strong> ${q.q.replace(/^\d+\)\s*/, '')}</div>
+        <div style="margin-top:.5rem">
+          <div>Correct: <span class="ans">${q.options[correct]}</span></div>
+          <div>Your Answer: <span class="you">${your !== null ? q.options[your] : 'Not Attempted'}</span></div>
+        </div>
+        ${q.expl ? `<div style="margin-top:.5rem; color:#4d5966">Explanation: ${q.expl}</div>` : ''}
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CA-GyanSagar</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Contact page specific styles */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #003d99 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: var(--text-white);
+        }
+        
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .contact-section {
+            padding: 5rem 0;
+            background-color: var(--background-color);
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            background-color: var(--text-white);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 1rem;
+            width: 30px;
+        }
+        
+        .contact-item div h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .contact-item div p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .contact-form {
+            background-color: var(--text-white);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-form h3 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.1);
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-white);
+            border: none;
+            padding: 15px 40px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+        }
+        
+        .map-section {
+            padding: 5rem 0;
+            background-color: var(--text-white);
+        }
+        
+        .map-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .map-placeholder {
+            background-color: var(--background-color);
+            height: 400px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            border: 2px dashed #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>CA-GyanSagar</h2>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#test-series" class="nav-link">Test Series</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
+                <a href="index.html#free-tests" class="nav-link">Free Tests</a>
+                <a href="index.html#results" class="nav-link">Results</a>
+                <a href="index.html#about" class="nav-link">About Us</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="language-switcher">
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </div>
+                <button class="login-btn" id="loginBtn">Login | Register</button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1 data-en="Contact Us" data-hi="हमसे संपर्क करें">Contact Us</h1>
+            <p data-en="Get in touch with our team for any queries or support" data-hi="किसी भी प्रश्न या सहायता के लिए हमारी टीम से संपर्क करें">Get in touch with our team for any queries or support</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3 data-en="Get In Touch" data-hi="संपर्क में रहें">Get In Touch</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4 data-en="Address" data-hi="पता">Address</h4>
+                            <p data-en="123 Business Park, Sector 15<br>Noida, Uttar Pradesh 201301" data-hi="123 बिजनेस पार्क, सेक्टर 15<br>नोएडा, उत्तर प्रदेश 201301">123 Business Park, Sector 15<br>Noida, Uttar Pradesh 201301</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4 data-en="Phone" data-hi="फोन">Phone</h4>
+                            <p>+91 98765 43210<br>+91 11 2345 6789</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4 data-en="Email" data-hi="ईमेल">Email</h4>
+                            <p>info@cagyansagar.com<br>support@cagyansagar.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4 data-en="Office Hours" data-hi="कार्यालय समय">Office Hours</h4>
+                            <p data-en="Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM" data-hi="सोमवार - शुक्रवार: सुबह 9:00 - शाम 6:00<br>शनिवार: सुबह 9:00 - दोपहर 2:00">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 data-en="Send Us a Message" data-hi="हमें संदेश भेजें">Send Us a Message</h3>
+                    
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                        <!-- Honeypot field for spam protection -->
+                        <input type="hidden" name="bot-field" />
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" data-en="Full Name *" data-hi="पूरा नाम *">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" data-en="Email Address *" data-hi="ईमेल पता *">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" data-en="Phone Number" data-hi="फोन नंबर">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" data-en="Subject *" data-hi="विषय *">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="" data-en="Select a subject" data-hi="एक विषय चुनें">Select a subject</option>
+                                    <option value="general" data-en="General Query" data-hi="सामान्य प्रश्न">General Query</option>
+                                    <option value="course" data-en="Course Inquiry" data-hi="पाठ्यक्रम पूछताछ">Course Inquiry</option>
+                                    <option value="support" data-en="Support" data-hi="सहायता">Support</option>
+                                    <option value="partnership" data-en="Partnership" data-hi="साझेदारी">Partnership</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" data-en="Message *" data-hi="संदेश *">Message *</label>
+                            <textarea id="message" name="message" placeholder="Please describe your query in detail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" data-en="Send Message" data-hi="संदेश भेजें">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <h2 class="section-title" data-en="Find Us" data-hi="हमें खोजें">Find Us</h2>
+            <div class="map-placeholder">
+                <div>
+                    <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                    <p data-en="Interactive map will be integrated here" data-hi="यहां इंटरैक्टिव मैप एकीकृत किया जाएगा">Interactive map will be integrated here</p>
+                    <p style="margin-top: 0.5rem; font-size: 1rem; color: #999;" data-en="123 Business Park, Sector 15, Noida, UP 201301" data-hi="123 बिजनेस पार्क, सेक्टर 15, नोएडा, यूपी 201301">123 Business Park, Sector 15, Noida, UP 201301</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <h3>CA-GyanSagar</h3>
+                        <p data-en="Your trusted partner in CA preparation journey. We provide comprehensive coaching and guidance to help you succeed in your CA exams." data-hi="CA तैयारी यात्रा में आपका भरोसेमंद साथी। हम आपकी CA परीक्षाओं में सफलता पाने में मदद करने के लिए व्यापक कोचिंग और मार्गदर्शन प्रदान करते हैं।">Your trusted partner in CA preparation journey. We provide comprehensive coaching and guidance to help you succeed in your CA exams.</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html" data-en="Home" data-hi="होम">Home</a></li>
+                        <li><a href="index.html#services" data-en="Services" data-hi="सेवाएं">Services</a></li>
+                        <li><a href="index.html#courses" data-en="Courses" data-hi="पाठ्यक्रम">Courses</a></li>
+                        <li><a href="index.html#resources" data-en="Resources" data-hi="संसाधन">Resources</a></li>
+                        <li><a href="index.html#about" data-en="About Us" data-hi="हमारे बारे में">About Us</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-hi="संपर्क">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 data-en="Contact Info" data-hi="संपर्क जानकारी">Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Business Park, Sector 15, Noida, UP 201301</p>
+                        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                        <p><i class="fas fa-envelope"></i> info@cagyansagar.com</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-en="Newsletter" data-hi="न्यूज़लेटर">Newsletter</h4>
+                    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" data-en="Subscribe" data-hi="सब्सक्राइब">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 CA-GyanSagar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-en="Login / Register" data-hi="लॉगिन / रजिस्टर">Login / Register</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="login" data-en="Login" data-hi="लॉगिन">Login</button>
+                        <button class="tab-btn" data-tab="register" data-en="Register" data-hi="रजिस्टर">Register</button>
+                    </div>
+                    
+                    <div id="login" class="tab-content active">
+                        <form class="auth-form">
+                            <div class="form-group">
+                                <label for="loginEmail" data-en="Email/Username" data-hi="ईमेल/उपयोगकर्ता नाम">Email/Username</label>
+                                <input type="text" id="loginEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword" data-en="Password" data-hi="पासवर्ड">Password</label>
+                                <input type="password" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-en="Login" data-hi="लॉगिन">Login</button>
+                        </form>
+                    </div>
+                    
+                    <div id="register" class="tab-content">
+                        <form class="auth-form">
+                            <div class="form-group">
+                                <label for="regName" data-en="Full Name" data-hi="पूरा नाम">Full Name</label>
+                                <input type="text" id="regName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regEmail" data-en="Email" data-hi="ईमेल">Email</label>
+                                <input type="email" id="regEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regPassword" data-en="Password" data-hi="पासवर्ड">Password</label>
+                                <input type="password" id="regPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regConfirmPassword" data-en="Confirm Password" data-hi="पासवर्ड की पुष्टि करें">Confirm Password</label>
+                                <input type="password" id="regConfirmPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-en="Register" data-hi="रजिस्टर">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

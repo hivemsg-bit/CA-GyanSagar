@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Downloads - CA-GyanSagar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+    .card { background:#fff; border:1px solid #eef2f7; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.06); padding:1.5rem; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+    .item { border:1px solid #eaf0f7; border-radius:12px; padding:1rem; background:#fff; }
+    .item a { text-decoration:none; color: var(--primary-color); font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="font-family:'Poppins', sans-serif; color: var(--primary-color);">My Downloads</h1>
+    <p style="color:#4d5966">Accessible after login. For now, links are placeholders. Replace IDs with your Drive file IDs.</p>
+
+    <div class="card" style="margin-top:1rem">
+      <h2>Free Tests</h2>
+      <div class="grid">
+        <div class="item"><div><strong>CA Foundation - Free Test</strong></div><a href="https://drive.google.com/uc?export=download&id=FOUNDATION_FILE_ID_PLACEHOLDER" target="_blank" rel="noopener">Download</a></div>
+        <div class="item"><div><strong>CA Intermediate - Free Test</strong></div><a href="https://drive.google.com/uc?export=download&id=INTERMEDIATE_FILE_ID_PLACEHOLDER" target="_blank" rel="noopener">Download</a></div>
+        <div class="item"><div><strong>CA Final - Free Test</strong></div><a href="https://drive.google.com/uc?export=download&id=FINAL_FILE_ID_PLACEHOLDER" target="_blank" rel="noopener">Download</a></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <h2>Paid Plans - Silver</h2>
+      <div class="grid" id="silverList"></div>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <h2>Paid Plans - Gold</h2>
+      <div class="grid" id="goldList"></div>
+    </div>
+
+    <div style="margin-top:1rem"><a href="thankyou.html?plan=silver&level=foundation" class="btn btn-outline">View Plan Materials Example</a></div>
+  </div>
+
+  <script>
+    // Placeholder generation for demo
+    function fill(listId, prefix, count) {
+      const el = document.getElementById(listId);
+      for (let i=1;i<=count;i++) {
+        const card = document.createElement('div');
+        card.className = 'item';
+        card.innerHTML = `<div><strong>${prefix} Test ${i}</strong></div>`;
+        const a = document.createElement('a');
+        a.href = `https://drive.google.com/uc?export=download&id=${prefix.toUpperCase()}_${i}`;
+        a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Download';
+        card.appendChild(a);
+        el.appendChild(card);
+      }
+    }
+    fill('silverList', 'silver_foundation', 6);
+    fill('goldList', 'gold_foundation', 10);
+  </script>
+</body>
+</html>

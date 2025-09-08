@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Export Attempts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .title { font-family:'Poppins', sans-serif; color: var(--primary-color); font-weight:600; margin-bottom:1rem; }
+    textarea { width:100%; height: 220px; padding: 10px; border:1px solid #ddd; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Admin - Export Attempts CSV</div>
+    <div style="margin-bottom: .75rem; color:#4d5966">Exports attempts saved in this browser’s localStorage (demo scope).</div>
+    <div style="display:flex; gap:.5rem; margin-bottom: .75rem;">
+      <button id="exportBtn" class="btn btn-primary">Export CSV</button>
+      <button id="downloadBtn" class="btn btn-outline">Download CSV</button>
+      <button id="clearBtn" class="btn btn-outline">Clear Attempts</button>
+    </div>
+    <textarea id="csvArea" placeholder="CSV output will appear here..."></textarea>
+  </div>
+
+  <script>
+    const ATTEMPTS_LIST_KEY = 'attempts_list';
+
+    function toCSV(rows){
+      return rows.map(r => r.map(v => '"' + String(v).replace(/"/g,'""') + '"').join(',')).join('\n');
+    }
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      let list = [];
+      try { list = JSON.parse(localStorage.getItem(ATTEMPTS_LIST_KEY) || '[]'); } catch (e) { list = []; }
+      const headers = ['timestamp','level','type','score','total','answers'];
+      const rows = [headers];
+      list.forEach(a => {
+        rows.push([a.timestamp, a.level, a.type, a.score, a.total, JSON.stringify(a.answers || [])]);
+      });
+      document.getElementById('csvArea').value = toCSV(rows);
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const csv = document.getElementById('csvArea').value;
+      if (!csv.trim()) { alert('Export CSV first.'); return; }
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'attempts.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (confirm('Clear attempts from this browser?')) {
+        localStorage.removeItem(ATTEMPTS_LIST_KEY);
+        alert('Cleared.');
+      }
+    });
+  </script>
+</body>
+</html>

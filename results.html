@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results & AIRs - CA-GyanSagar Test Series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-results { background: linear-gradient(135deg, var(--primary-color) 0%, #003d99 100%); color:#fff; padding: 120px 0 80px; text-align:center; }
+    .hero-results h1 { font-size: 2.6rem; }
+    .wrap { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; }
+    .stats { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
+    .stat { background:#fff; border-radius:16px; padding:1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.06); border:1px solid #eef2f7; text-align:center; }
+    .stat h3 { color: var(--primary-color); font-size: 1.6rem; }
+    .toppers { margin-top:2rem; }
+    .grid3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem; }
+    .card { background:#fff; border-radius:16px; padding:1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.06); border:1px solid #eef2f7; }
+    .card h4 { margin-bottom:.25rem; }
+    .badge { display:inline-block; background: var(--secondary-color); color:#fff; padding: 4px 10px; border-radius:999px; font-size:.8rem; }
+    .archive { margin-top:2rem; }
+    .archive .row { display:flex; justify-content: space-between; padding: .75rem 1rem; background:#fff; border:1px solid #eef2f7; border-radius:12px; margin-bottom:.75rem; align-items:center; }
+    .controls { display:flex; gap:.5rem; align-items:center; margin: 1rem 0; }
+    .controls input, .controls select { padding:10px; border:1px solid #ddd; border-radius:8px; }
+    .list { margin-top: 1rem; }
+    .row .meta { color:#4d5966; font-size:.95rem; }
+    .pager { display:flex; gap:.5rem; justify-content:flex-end; margin-top: .75rem; }
+    .pager button { padding:8px 12px; border:1px solid #d9e2ef; background:#fff; border-radius:8px; cursor:pointer; }
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .grid3 { grid-template-columns: 1fr; }
+      .archive .row { flex-direction: column; gap:.5rem; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" style="text-decoration:none;color:inherit"><h2>CA-GyanSagar</h2></a>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#test-series" class="nav-link">Test Series</a>
+        <a href="index.html#pricing" class="nav-link">Pricing</a>
+        <a href="index.html#free-tests" class="nav-link">Free Tests</a>
+        <a href="results.html" class="nav-link active">Results</a>
+        <a href="index.html#about" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <div class="language-switcher">
+          <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <button class="login-btn" id="loginBtn">Login | Register</button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-results">
+    <div class="container">
+      <h1>Results & AIRs</h1>
+      <p>Thousands improved their scores with our CA Test Series</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><h3>10,000+</h3><div>Aspirants Trained</div></div>
+      <div class="stat"><h3>500+</h3><div>AIRs Achieved</div></div>
+      <div class="stat"><h3>92%</h3><div>Improved Scores</div></div>
+      <div class="stat"><h3>4.8/5</h3><div>Avg. Rating</div></div>
+    </div>
+
+    <div class="toppers">
+      <h2 class="section-title" style="margin-bottom:1.5rem">Recent Highlights</h2>
+      <div class="grid3">
+        <div class="card">
+          <div class="badge">AIR 12</div>
+          <h4>Rohan Mehta</h4>
+          <div>CA Final (Nov 2024)</div>
+          <p style="color:#4d5966; margin-top:.5rem">“Mock tests mirrored the actual exam level. Analytics showed where to focus.”</p>
+        </div>
+        <div class="card">
+          <div class="badge">AIR 24</div>
+          <h4>Shreya Gupta</h4>
+          <div>CA Intermediate (May 2024)</div>
+          <p style="color:#4d5966; margin-top:.5rem">“Detailed solutions and revision packs made the difference for me.”</p>
+        </div>
+        <div class="card">
+          <div class="badge">Top 1%</div>
+          <h4>Arjun Singh</h4>
+          <div>CA Foundation (Nov 2024)</div>
+          <p style="color:#4d5966; margin-top:.5rem">“Subject-wise tests helped master weak areas quickly.”</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="archive">
+      <h2 class="section-title" style="margin-bottom:1rem">Results Archive</h2>
+      <div class="controls">
+        <input type="text" id="searchBox" placeholder="Search by name or level">
+        <select id="levelFilter">
+          <option value="">All Levels</option>
+          <option value="foundation">Foundation</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="final">Final</option>
+        </select>
+      </div>
+      <div class="list" id="resultsList"></div>
+      <div class="pager">
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Next</button>
+      </div>
+    </div>
+
+    <div class="toppers" style="margin-top:2rem;">
+      <h2 class="section-title" style="margin-bottom:1rem">Share Your Result</h2>
+      <div class="card">
+        <form name="results-submission" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="results-submission">
+          <div style="display:none">
+            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="rname">Full Name</label>
+              <input id="rname" name="name" type="text" required>
+            </div>
+            <div class="form-group">
+              <label for="remail">Email</label>
+              <input id="remail" name="email" type="email" required>
+            </div>
+            <div class="form-group">
+              <label for="rlevel">Level</label>
+              <input id="rlevel" name="level" type="text" placeholder="Foundation / Intermediate / Final" required>
+            </div>
+            <div class="form-group">
+              <label for="rair">AIR/Rank (optional)</label>
+              <input id="rair" name="air" type="text" placeholder="e.g., AIR 24">
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="rmessage">Message</label>
+              <textarea id="rmessage" name="message" rows="4" placeholder="Share your experience with our Test Series..."></textarea>
+            </div>
+          </div>
+          <div style="margin-top:1rem; display:flex; justify-content:flex-end;">
+            <button type="submit" class="btn btn-primary">Submit Result</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <h3>CA-GyanSagar</h3>
+            <p>India's leading CA Test Series platform offering exam-pattern mock tests, detailed solutions, performance analytics, and All India Ranking.</p>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#test-series">Test Series</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#free-tests">Free Tests</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact Info</h4>
+          <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Business Park, Sector 15, Noida, UP 201301</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> info@cagyansagar.com</p>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 CA-GyanSagar. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Login / Register</h2>
+        <span class="close" id="closeModal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="tab-container">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="login">Login</button>
+            <button class="tab-btn" data-tab="register">Register</button>
+          </div>
+          <div id="login" class="tab-content active">
+            <form class="auth-form">
+              <div class="form-group">
+                <label for="loginEmail">Email/Username</label>
+                <input type="text" id="loginEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+          <div id="register" class="tab-content">
+            <form class="auth-form">
+              <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" required>
+              </div>
+              <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" required>
+              </div>
+              <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Demo: read attempts from localStorage for listing
+    const ATTEMPTS_LIST_KEY = 'attempts_list';
+    let all = [];
+    try { all = JSON.parse(localStorage.getItem(ATTEMPTS_LIST_KEY) || '[]'); } catch (e) { all = []; }
+    // Fallback sample
+    if (!all.length) {
+      all = [
+        { timestamp: '2025-01-01T10:00:00Z', level: 'foundation', type: 'free', score: 4, total: 5 },
+        { timestamp: '2025-01-03T12:20:00Z', level: 'intermediate', type: 'free', score: 3, total: 5 },
+        { timestamp: '2025-01-05T09:05:00Z', level: 'final', type: 'free', score: 5, total: 5 }
+      ];
+    }
+
+    const pageSize = 5;
+    let page = 0;
+    const searchBox = document.getElementById('searchBox');
+    const levelFilter = document.getElementById('levelFilter');
+    const listEl = document.getElementById('resultsList');
+
+    function render() {
+      const term = (searchBox.value || '').toLowerCase();
+      const lev = levelFilter.value;
+      const filtered = all.filter(a => {
+        const name = (a.name || '').toLowerCase();
+        const matchesTerm = !term || name.includes(term) || (a.level||'').includes(term);
+        const matchesLevel = !lev || (a.level === lev);
+        return matchesTerm && matchesLevel;
+      });
+      const start = page * pageSize;
+      const pageItems = filtered.slice(start, start + pageSize);
+      listEl.innerHTML = '';
+      pageItems.forEach(it => {
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.innerHTML = `<div>
+          <div><strong>${(it.name||'Anonymous')}</strong></div>
+          <div class="meta">Level: CA ${it.level||'-'} • Score: ${it.score}/${it.total} • ${new Date(it.timestamp).toLocaleString()}</div>
+        </div>
+        <a href="#" class="btn btn-outline">Details</a>`;
+        listEl.appendChild(row);
+      });
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => { if (page>0) { page--; render(); } });
+    document.getElementById('nextBtn').addEventListener('click', () => { page++; render(); });
+    searchBox.addEventListener('input', () => { page=0; render(); });
+    levelFilter.addEventListener('change', () => { page=0; render(); });
+    render();
+  </script>
+</body>
+</html>

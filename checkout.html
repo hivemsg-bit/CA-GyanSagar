@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - CA-GyanSagar Test Series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .checkout-hero { background: linear-gradient(135deg, var(--primary-color) 0%, #003d99 100%); color:#fff; padding: 120px 0 60px; text-align:center; }
+    .checkout-hero h1 { font-size: 2.4rem; margin-bottom: .5rem; }
+    .checkout-wrap { max-width: 1000px; margin: -40px auto 40px; padding: 0 20px; }
+    .checkout-grid { display:grid; grid-template-columns: 2fr 1.2fr; gap: 1.5rem; }
+    .card { background:#fff; border-radius:16px; box-shadow: 0 4px 20px rgba(0,0,0,.06); border:1px solid #eef2f7; }
+    .card .card-header { padding: 1.25rem 1.5rem; border-bottom:1px solid #f0f3f7; font-family:'Poppins', sans-serif; font-weight:600; color: var(--primary-color); }
+    .card .card-body { padding: 1.5rem; }
+    .plan-price { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
+    .plan-original { color:#9aa5b1; text-decoration: line-through; margin-left:8px; }
+    .plan-badge { display:inline-block; background: var(--secondary-color); color:#fff; padding: 4px 10px; border-radius:999px; font-size:.8rem; margin-left:10px; }
+    .plan-features { list-style:none; padding:0; margin: 1rem 0 0; }
+    .plan-features li { margin:.5rem 0; color:#4d5966; }
+    .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; }
+    .form-group label { margin-bottom:.4rem; font-weight:500; color: var(--text-dark); }
+    .form-group input, .form-group textarea { padding: 12px; border:1px solid #ddd; border-radius: 8px; font-size:1rem; }
+    .form-group input:focus, .form-group textarea:focus { outline:none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(0,82,204,.1); }
+    .pay-btn { width:100%; margin-top: .5rem; }
+    .summary { display:flex; align-items:center; justify-content: space-between; }
+    .summary .level { font-weight:600; color:#4d5966; }
+    @media (max-width: 900px){ .checkout-grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" style="text-decoration:none;color:inherit"><h2>CA-GyanSagar</h2></a>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#test-series" class="nav-link">Test Series</a>
+        <a href="index.html#pricing" class="nav-link">Pricing</a>
+        <a href="index.html#free-tests" class="nav-link">Free Tests</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="index.html#about" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <div class="language-switcher">
+          <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <button class="login-btn" id="loginBtn">Login | Register</button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="checkout-hero">
+    <div class="container">
+      <h1>Secure Checkout</h1>
+      <p>Complete your purchase to access the CA Test Series</p>
+    </div>
+  </section>
+
+  <div class="checkout-wrap">
+    <div class="checkout-grid">
+      <div class="card">
+        <div class="card-header">Billing Details</div>
+        <div class="card-body">
+          <form id="checkoutForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" required>
+              </div>
+            </div>
+            <div style="margin-top:1rem"></div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="card">Card Number</label>
+                <input type="text" id="card" placeholder="4111 1111 1111 1111" required>
+              </div>
+              <div class="form-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY" required>
+              </div>
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" placeholder="123" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large pay-btn">Pay Now</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Order Summary</div>
+        <div class="card-body">
+          <div class="summary">
+            <div>
+              <div id="planName" style="font-weight:700; font-family:'Poppins', sans-serif;">Plan</div>
+              <div class="level" id="planLevel">Level</div>
+            </div>
+            <div>
+              <span class="plan-price" id="planPrice">₹0</span>
+              <span class="plan-original" id="planOriginal"></span>
+            </div>
+          </div>
+          <ul class="plan-features" id="planFeatures" style="margin-top:1rem"></ul>
+
+          <div style="margin-top:1rem; display:flex; gap:.5rem; align-items:center">
+            <input id="couponInput" type="text" placeholder="Have a coupon?" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:8px;">
+            <button id="applyCouponBtn" class="btn btn-outline" style="padding:10px 16px">Apply</button>
+          </div>
+          <div id="couponNote" style="margin-top:.5rem; font-size:.9rem; color:#4d5966"></div>
+
+          <div style="margin-top:1rem; border-top:1px dashed #e5e9f2; padding-top:1rem">
+            <div style="display:flex; justify-content:space-between; margin:.25rem 0">
+              <span>Subtotal</span>
+              <span id="subtotal">₹0</span>
+            </div>
+            <div id="discountRow" style="display:none; justify-content:space-between; margin:.25rem 0; color:#0a7d00">
+              <span>Discount</span>
+              <span id="discountAmt">-₹0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:.5rem; font-weight:700">
+              <span>Total</span>
+              <span id="total">₹0</span>
+            </div>
+          </div>
+
+          <div style="margin-top:1rem">
+            <a href="index.html#pricing" class="nav-link" style="color: var(--primary-color); text-decoration:none">Change plan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reuse modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Login / Register</h2>
+        <span class="close" id="closeModal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="tab-container">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="login">Login</button>
+            <button class="tab-btn" data-tab="register">Register</button>
+          </div>
+          <div id="login" class="tab-content active">
+            <form class="auth-form">
+              <div class="form-group">
+                <label for="loginEmail">Email/Username</label>
+                <input type="text" id="loginEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+          <div id="register" class="tab-content">
+            <form class="auth-form">
+              <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" required>
+              </div>
+              <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" required>
+              </div>
+              <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Parse plan and level from URL
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        plan: (params.get('plan') || 'silver').toLowerCase(),
+        level: (params.get('level') || 'foundation').toLowerCase(),
+        coupon: (params.get('coupon') || '').toUpperCase()
+      };
+    }
+
+    const PLAN_DATA = {
+      silver: {
+        name: 'Silver Pack',
+        price: '₹199',
+        original: '₹499',
+        features: ['15 Full-length Tests', 'Detailed Solutions', 'All India Rank', 'Email Support']
+      },
+      gold: {
+        name: 'Gold Pack',
+        price: '₹999',
+        original: '₹1999',
+        features: ['30+ Full-length Tests', 'Video Solutions', 'Personalized Feedback', 'Priority Support', 'Mobile App Access']
+      },
+      free: {
+        name: 'Free Pack',
+        price: 'Free',
+        original: '',
+        features: ['2 Subject-wise Tests', 'Basic Performance Analysis']
+      }
+    };
+
+    function titleCase(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function parseAmount(text){
+      if (!text || text.toLowerCase() === 'free') return 0;
+      return parseInt(text.replace(/[^0-9]/g, ''), 10) || 0;
+    }
+
+    function formatAmount(num){ return '₹' + num; }
+
+    function renderSummary(){
+      const { plan, level } = getQueryParams();
+      const data = PLAN_DATA[plan] || PLAN_DATA['silver'];
+      document.getElementById('planName').textContent = data.name;
+      document.getElementById('planLevel').textContent = 'Level: CA ' + titleCase(level);
+      document.getElementById('planPrice').textContent = data.price;
+      document.getElementById('planOriginal').textContent = data.original;
+      const list = document.getElementById('planFeatures');
+      list.innerHTML = '';
+      data.features.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        list.appendChild(li);
+      });
+
+      // Price totals
+      const subtotal = parseAmount(data.price);
+      document.getElementById('subtotal').textContent = data.price === 'Free' ? '₹0' : data.price;
+      document.getElementById('total').textContent = data.price === 'Free' ? '₹0' : data.price;
+      document.getElementById('discountRow').style.display = 'none';
+      document.getElementById('discountAmt').textContent = '-₹0';
+      document.getElementById('couponNote').textContent = '';
+    }
+
+    renderSummary();
+    // Auto-apply coupon via URL
+    const qp = getQueryParams();
+    if (qp.coupon) {
+      const couponInput = document.getElementById('couponInput');
+      couponInput.value = qp.coupon;
+      applyCoupon(qp.coupon);
+    }
+
+    // Mock payment submission
+    document.getElementById('checkoutForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      // On success, redirect to thank you with plan/level
+      const params = new URLSearchParams(window.location.search);
+      const plan = params.get('plan') || 'silver';
+      const level = params.get('level') || 'foundation';
+      window.location.href = `thankyou.html?plan=${encodeURIComponent(plan)}&level=${encodeURIComponent(level)}`;
+    });
+
+    // Coupon logic
+    const COUPONS = {
+      SAVE50: { type: 'flat', value: 50, note: '₹50 off applied' },
+      SAVE100: { type: 'flat', value: 100, note: '₹100 off applied' },
+      GOLD20: { type: 'percent', value: 20, note: '20% off on Gold' },
+      NEWUSER10: { type: 'percent', value: 10, note: 'New user 10% off' }
+    };
+
+    function applyCoupon(code){
+      const { plan } = getQueryParams();
+      const priceText = document.getElementById('planPrice').textContent;
+      const base = parseAmount(priceText);
+      if (base === 0) { // Free plan
+        document.getElementById('couponNote').textContent = 'Coupon not applicable on Free plan.';
+        return;
+      }
+      const coupon = COUPONS[code.toUpperCase()];
+      if (!coupon) {
+        document.getElementById('couponNote').textContent = 'Invalid coupon code.';
+        document.getElementById('discountRow').style.display = 'none';
+        document.getElementById('discountAmt').textContent = '-₹0';
+        document.getElementById('total').textContent = formatAmount(base);
+        return;
+      }
+      // Scope example: GOLD20 only for gold
+      if (coupon === COUPONS.GOLD20 && plan !== 'gold') {
+        document.getElementById('couponNote').textContent = 'This coupon applies to Gold plan only.';
+        document.getElementById('discountRow').style.display = 'none';
+        document.getElementById('discountAmt').textContent = '-₹0';
+        document.getElementById('total').textContent = formatAmount(base);
+        return;
+      }
+
+      let discount = 0;
+      if (coupon.type === 'flat') discount = coupon.value;
+      if (coupon.type === 'percent') discount = Math.round((coupon.value / 100) * base);
+      if (discount > base) discount = base;
+      const total = base - discount;
+      document.getElementById('discountRow').style.display = 'flex';
+      document.getElementById('discountAmt').textContent = '-'+formatAmount(discount).replace('₹','₹');
+      document.getElementById('total').textContent = formatAmount(total);
+      document.getElementById('couponNote').textContent = coupon.note;
+    }
+
+    document.getElementById('applyCouponBtn').addEventListener('click', function(){
+      const code = document.getElementById('couponInput').value.trim();
+      if (!code) { document.getElementById('couponNote').textContent = 'Enter a coupon code.'; return; }
+      applyCoupon(code);
+    });
+  </script>
+</body>
+</html>

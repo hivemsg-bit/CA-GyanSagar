@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Test - CA-GyanSagar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .test-header { position: sticky; top: 0; z-index: 10; background:#fff; border-bottom:1px solid #eef2f7; }
+    .test-header .container { display:flex; justify-content: space-between; align-items:center; padding: 1rem 20px; }
+    .test-title { font-family:'Poppins', sans-serif; color: var(--primary-color); font-weight:600; }
+    .timer { font-family: 'Poppins', sans-serif; font-weight:600; color:#d93025; }
+    .test-wrap { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+    .question { background:#fff; border:1px solid #eef2f7; border-radius:12px; padding:1rem 1.25rem; box-shadow: 0 4px 16px rgba(0,0,0,.04); }
+    .question + .question { margin-top: 1rem; }
+    .q-title { font-weight:600; margin-bottom: .5rem; }
+    .options { list-style:none; padding-left:0; }
+    .options li { margin:.4rem 0; }
+    .submit-bar { display:flex; justify-content: flex-end; gap:.75rem; margin: 1rem 0 2rem; }
+    .progress { height: 10px; background:#eef2f7; border-radius:999px; overflow:hidden; margin: 12px 0; }
+    .progress > span { display:block; height:100%; background: linear-gradient(90deg, #2ecc71, #27ae60); width:0%; transition: width .2s ease; }
+    .nav-strip { display:flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1rem; }
+    .nav-strip .qbtn { width:36px; height:36px; border-radius:8px; border:1px solid #d9e2ef; background:#fff; cursor:pointer; font-weight:600; }
+    .qbtn.answered { background:#e9f9ee; border-color:#27ae60; color:#1e8449; }
+
+    /* Result Modal */
+    .result-modal { display:none; position: fixed; z-index: 4000; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.5); }
+    .result-box { background:#fff; width: 90%; max-width: 520px; margin: 10% auto; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.2); overflow:hidden; }
+    .result-header { padding: 1rem 1.25rem; border-bottom:1px solid #eef2f7; font-family:'Poppins', sans-serif; font-weight:600; color: var(--primary-color); }
+    .result-body { padding: 1.25rem; }
+    .result-actions { display:flex; justify-content:flex-end; gap:.75rem; padding: 0 1.25rem 1.25rem; }
+  </style>
+</head>
+<body>
+  <div class="test-header">
+    <div class="container">
+      <div class="test-title" id="testTitle">Free Test</div>
+      <div class="timer" id="timer">00:00</div>
+    </div>
+  </div>
+
+  <div class="test-wrap">
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="nav-strip" id="qNav"></div>
+    <div id="questions"></div>
+    <div class="submit-bar">
+      <button class="btn btn-outline" id="saveBtn">Save</button>
+      <button class="btn btn-primary" id="submitBtn">Submit Test</button>
+    </div>
+  </div>
+
+  <!-- Hidden Netlify form for attempt submission -->
+  <form name="test-attempts" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" style="display:none">
+    <input type="hidden" name="form-name" value="test-attempts">
+    <input type="text" name="bot-field">
+    <input type="text" name="level">
+    <input type="text" name="type">
+    <input type="text" name="score">
+    <input type="text" name="total">
+    <input type="text" name="timestamp">
+    <input type="text" name="answers">
+  </form>
+
+  <div class="result-modal" id="resultModal">
+    <div class="result-box">
+      <div class="result-header">Test Result</div>
+      <div class="result-body">
+        <div id="scoreText">You scored 0/0</div>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="btn btn-outline">Go Back Home</a>
+        <button id="solutionsBtn" class="btn btn-primary">View Solutions</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const level = (params.get('level') || 'foundation').toLowerCase();
+    const type = (params.get('type') || 'free').toLowerCase();
+
+    const LEVEL_META = {
+      foundation: { title: 'CA Foundation - Free Practice Test', duration: 30 },
+      intermediate: { title: 'CA Intermediate - Free Practice Test', duration: 45 },
+      final: { title: 'CA Final - Free Practice Test', duration: 60 }
+    };
+
+    const meta = LEVEL_META[level] || LEVEL_META.foundation;
+    document.getElementById('testTitle').textContent = meta.title;
+
+    // Sample questions (minimal demo dataset)
+    const QUESTIONS = [
+      { q: '1) Accounting equation stands for?', subject: 'Accounting', options: ['Assets = Liabilities + Capital', 'Assets = Capital - Liabilities', 'Assets + Liabilities = Capital', 'Liabilities = Assets + Capital'], ans: 0, expl: 'Basic accounting equation: Assets = Liabilities + Equity (Capital).' },
+      { q: '2) Revenue is recognised when?', subject: 'Accounting', options: ['Cash is received', 'Goods are produced', 'Risk and rewards transfer', 'Invoice is prepared'], ans: 2, expl: 'Under accrual, revenue is recognised when significant risks and rewards are transferred.' },
+      { q: '3) Depreciation is a process of?', subject: 'Accounting', options: ['Valuation', 'Allocation', 'Appreciation', 'Saving tax'], ans: 1, expl: 'It is systematic allocation of depreciable amount over useful life.' },
+      { q: '4) SFM primarily deals with?', subject: 'SFM', options: ['Operations', 'Human Resources', 'Financial Decisions', 'Tax Filing'], ans: 2, expl: 'Strategic Financial Management concerns long-term financial decisions and value maximisation.' },
+      { q: '5) Taxation covers?', subject: 'Tax', options: ['Direct and Indirect taxes', 'Only GST', 'Only Income Tax', 'None'], ans: 0, expl: 'Syllabus spans both Direct (Income Tax) and Indirect (GST) taxes.' }
+    ];
+
+    // LocalStorage keys
+    const ATTEMPT_KEY = `attempt_${level}_${type}`;
+    const ATTEMPTS_LIST_KEY = 'attempts_list';
+
+    // Render questions with possible resume
+    const container = document.getElementById('questions');
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(ATTEMPT_KEY) || 'null'); } catch (e) { saved = null; }
+
+    QUESTIONS.forEach((item, idx) => {
+      const qEl = document.createElement('div');
+      qEl.className = 'question';
+      const savedVal = saved && saved.answers ? saved.answers[idx] : null;
+      qEl.innerHTML = `
+        <div class="q-title">${item.q}</div>
+        <ul class="options">
+          ${item.options.map((opt, oi) => `
+            <li>
+              <label>
+                <input type="radio" name="q${idx}" value="${oi}" ${savedVal === oi ? 'checked' : ''}> ${opt}
+              </label>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+      container.appendChild(qEl);
+    });
+
+    // Build navigator
+    const nav = document.getElementById('qNav');
+    QUESTIONS.forEach((_, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'qbtn';
+      btn.textContent = idx+1;
+      btn.addEventListener('click', () => {
+        const target = container.children[idx];
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      nav.appendChild(btn);
+    });
+
+    // Timer
+    let remaining = meta.duration * 60; // seconds
+    if (saved && typeof saved.remaining === 'number') remaining = saved.remaining;
+    const timerEl = document.getElementById('timer');
+    let interval = setInterval(() => {
+      remaining--;
+      const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const s = String(remaining % 60).padStart(2, '0');
+      timerEl.textContent = `${m}:${s}`;
+      persistProgress();
+      if (remaining <= 0) {
+        clearInterval(interval);
+        evaluateAndShow();
+      }
+    }, 1000);
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      clearInterval(interval);
+      evaluateAndShow();
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      persistProgress(true);
+      alert('Progress saved. You can resume later from this device.');
+    });
+
+    function evaluateAndShow() {
+      let score = 0;
+      const answers = [];
+      QUESTIONS.forEach((item, idx) => {
+        const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+        const val = checked ? Number(checked.value) : null;
+        answers.push(val);
+        if (val === item.ans) score++;
+      });
+      document.getElementById('scoreText').textContent = `You scored ${score}/${QUESTIONS.length}`;
+      document.getElementById('resultModal').style.display = 'block';
+
+      // Save attempt final
+      const attempt = {
+        level,
+        type,
+        timestamp: new Date().toISOString(),
+        score,
+        total: QUESTIONS.length,
+        answers,
+        remaining: 0,
+        questions: QUESTIONS
+      };
+      localStorage.setItem(ATTEMPT_KEY, JSON.stringify(attempt));
+      // Append to attempts list
+      let list = [];
+      try { list = JSON.parse(localStorage.getItem(ATTEMPTS_LIST_KEY) || '[]'); } catch (e) { list = []; }
+      list.push(attempt);
+      localStorage.setItem(ATTEMPTS_LIST_KEY, JSON.stringify(list));
+
+      // Submit to Netlify Forms (no redirect)
+      try {
+        const data = new FormData();
+        data.append('form-name', 'test-attempts');
+        data.append('level', level);
+        data.append('type', type);
+        data.append('score', String(score));
+        data.append('total', String(QUESTIONS.length));
+        data.append('timestamp', attempt.timestamp);
+        data.append('answers', JSON.stringify(answers));
+        fetch('/', { method: 'POST', body: data });
+      } catch (e) {}
+    }
+
+    document.getElementById('solutionsBtn').addEventListener('click', () => {
+      window.location.href = `solutions.html?level=${encodeURIComponent(level)}&type=${encodeURIComponent(type)}`;
+    });
+
+    // Autosave on change
+    container.addEventListener('change', () => {
+      persistProgress();
+    });
+
+    function persistProgress(force=false) {
+      const answers = [];
+      QUESTIONS.forEach((item, idx) => {
+        const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+        answers.push(checked ? Number(checked.value) : null);
+      });
+      const snapshot = {
+        level,
+        type,
+        remaining,
+        answers,
+        questions: QUESTIONS,
+        timestamp: new Date().toISOString(),
+        status: 'in_progress'
+      };
+      try { localStorage.setItem(ATTEMPT_KEY, JSON.stringify(snapshot)); } catch (e) {}
+
+      // Update progress bar and navigator
+      const answered = answers.filter(v => v !== null).length;
+      const pct = Math.round((answered / QUESTIONS.length) * 100);
+      const bar = document.getElementById('progressBar');
+      if (bar) bar.style.width = pct + '%';
+      const navBtns = document.querySelectorAll('.qbtn');
+      navBtns.forEach((b, i) => {
+        if (answers[i] !== null) b.classList.add('answered'); else b.classList.remove('answered');
+      });
+    }
+
+    // If there was saved progress, offer resume notice
+    if (saved && saved.status === 'in_progress') {
+      if (confirm('Resume your last saved test?')) {
+        // already applied via rendering and remaining time
+      } else {
+        localStorage.removeItem(ATTEMPT_KEY);
+      }
+    }
+  </script>
+</body>
+</html>

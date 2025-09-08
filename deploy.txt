@@ -1,0 +1,43 @@
+CA-GyanSagar | GitHub पर अपलोड (तुरंत गाइड)
+
+भाग 1: मैन्युअल तरीका (GitHub UI से)
+1) अपने ब्राउज़र में https://github.com खोलें और लॉगिन करें।
+2) ऊपर दाईं ओर + पर क्लिक करें → New repository चुनें।
+3) Repository name दें (उदा. ca-gyansagar) → Public रहने दें → Create repository।
+4) नए रेपो में जाएँ → “Add file” → “Upload files” पर क्लिक करें।
+5) अपने प्रोजेक्ट के सभी फाइल/फ़ोल्डर (index.html, styles.css, script.js, contact.html, checkout.html, results.html, test.html, solutions.html, my-downloads.html, thankyou.html, netlify.toml, README.md, deploy.txt आदि) ड्रैग-ड्रॉप करें।
+6) नीचे “Commit changes” पर क्लिक करें। आपका कोड GitHub पर अपलोड हो जाएगा।
+
+भाग 2: Git कमांड तरीका (Windows PowerShell)
+पूर्व-आवश्यकताएँ: Git इंस्टॉल हो (https://git-scm.com), GitHub अकाउंट।
+
+1) प्रोजेक्ट फ़ोल्डर में जाएँ:
+   cd C:\Users\hp\Desktop\CA-GyanSagar
+
+2) Git इनिशियलाइज़ करें:
+   git init
+
+3) सभी फाइलें स्टेज करें:
+   git add .
+
+4) पहली कमिट बनाएं:
+   git commit -m "Initial commit: CA-GyanSagar website"
+
+5) GitHub पर नया रेपो बनाएं (UI से) और HTTPS URL कॉपी करें (उदा. https://github.com/<your-username>/ca-gyansagar.git)
+
+6) origin रिमोट जोड़ें:
+   git remote add origin https://github.com/<your-username>/ca-gyansagar.git
+
+7) डिफ़ॉल्ट ब्रांच main सेट करके पुश करें:
+   git branch -M main
+   git push -u origin main
+
+हो गया! अब आपका प्रोजेक्ट GitHub पर है।
+
+टिप्स:
+- कोई बदलाव के बाद फिर से अपलोड:
+   git add .
+   git commit -m "Update"
+   git push
+- .gitignore की जरूरत नहीं (ये pure HTML/CSS/JS है)।
+- बाद में Netlify पर डिप्लॉय करना हो तो Netlify डैशबोर्ड में “New site from Git” → GitHub कनेक्ट करें → अपना रेपो चुनें → Build command खाली और Publish directory “/” रहने दें (static site)।

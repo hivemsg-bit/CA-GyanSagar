@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You - Access Your Materials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, var(--primary-color) 0%, #003d99 100%); color:#fff; padding: 80px 0; text-align:center; }
+    .materials { background:#fff; border:1px solid #eef2f7; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.06); padding:1.5rem; margin-top:-40px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+    .item { border:1px solid #eaf0f7; border-radius:12px; padding:1rem; background:#fff; }
+    .item a { text-decoration:none; color: var(--primary-color); font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="container">
+      <h1>Payment Successful</h1>
+      <p>Thank you for your purchase. Access your study materials below.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="materials">
+      <h2>Access Your Study Materials</h2>
+      <p>Download your purchased test series papers from the links below.</p>
+      <div id="meta" style="margin:.5rem 0 1rem; color:#4d5966"></div>
+      <div class="grid" id="downloads"></div>
+      <div style="margin-top:1rem"><a href="my-downloads.html" class="btn btn-outline">Go to My Downloads</a></div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan = (params.get('plan') || 'silver').toLowerCase();
+    const level = (params.get('level') || 'foundation').toLowerCase();
+
+    const FILES = {
+      foundation: {
+        silver: Array.from({length: 15}, (_,i) => ({ name: `Foundation Test ${i+1}`, id: `FOUND_SILVER_${i+1}`})),
+        gold: Array.from({length: 30}, (_,i) => ({ name: `Foundation Test ${i+1}`, id: `FOUND_GOLD_${i+1}`}))
+      },
+      intermediate: {
+        silver: Array.from({length: 15}, (_,i) => ({ name: `Intermediate Test ${i+1}`, id: `INTER_SILVER_${i+1}`})),
+        gold: Array.from({length: 30}, (_,i) => ({ name: `Intermediate Test ${i+1}`, id: `INTER_GOLD_${i+1}`}))
+      },
+      final: {
+        silver: Array.from({length: 15}, (_,i) => ({ name: `Final Test ${i+1}`, id: `FINAL_SILVER_${i+1}`})),
+        gold: Array.from({length: 30}, (_,i) => ({ name: `Final Test ${i+1}`, id: `FINAL_GOLD_${i+1}`}))
+      }
+    };
+
+    const items = (FILES[level] && FILES[level][plan]) || [];
+    document.getElementById('meta').textContent = `Plan: ${plan.toUpperCase()} • Level: CA ${level.charAt(0).toUpperCase()+level.slice(1)} • Files: ${items.length}`;
+
+    const list = document.getElementById('downloads');
+    items.forEach(file => {
+      const a = document.createElement('a');
+      a.href = `https://drive.google.com/uc?export=download&id=${file.id}`;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Download PDF';
+      const card = document.createElement('div');
+      card.className = 'item';
+      card.innerHTML = `<div style="margin-bottom:.4rem; font-weight:600;">${file.name}</div>`;
+      card.appendChild(a);
+      list.appendChild(card);
+    });
+  </script>
+</body>
+</html>
